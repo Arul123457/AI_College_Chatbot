@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhaanish Ahmed Institute of Technology</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="icon" href="/static/assets/logo.jpeg" />
+  <script defer src="/static/config.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header img {
+      height: 60px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .welcome {
+      background: #ffffff;
+      color: #000;
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .welcome h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .welcome p {
+      font-size: 18px;
+      color: #444;
+    }
+    .carousel {
+      width: 100%;
+      overflow: hidden;
+      height: 400px;
+      position: relative;
+    }
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    footer {
+      background: #00264d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+    .edubot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffffff;
+      font-size: 28px;
+      padding: 12px;
+      border-radius: 50%;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      z-index: 10000;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .edubot-toggle:hover {
+      transform: scale(1.1);
+    }
+    #chatbot-panel {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 400px;
+      height: 550px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      display: none;
+      z-index: 9999;
+      background: white;
+    }
+    #chatbot-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: all;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Header -->
+  <header>
+    <img src="/static/assets/logo.jpeg" alt="College Logo" />
+    <nav>
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#courses">Courses</a>
+      <a href="#admissions">Admissions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ✅ Welcome -->
+  <section class="welcome">
+    <h1>Welcome to Dhaanish Ahmed Institute of Technology</h1>
+    <p>Empowering Future Innovators in Technology & Engineering</p>
+  </section>
+
+  <!-- ✅ Carousel -->
+  <section class="carousel">
+    <div class="slideshow">
+      <img src="/static/assets/slide1.jpg" class="slide active" />
+      <img src="/static/assets/slide2.jpg" class="slide" />
+      <img src="/static/assets/slide3.jpg" class="slide" />
+    </div>
+  </section>
+
+  <!-- ✅ Footer -->
+  <footer>
+    &copy; 2025 Dhaanish Ahmed Institute of Technology. All rights reserved.
+  </footer>
+
+  <!-- ✅ Floating Bot Button -->
+  <div class="edubot-toggle" id="edubot-toggle">🤖</div>
+
+  <!-- ✅ Chatbot Panel -->
+  <div id="chatbot-panel">
+    <iframe id="chatbot-iframe" src="/chat-ui"></iframe>
+  </div>  
+
+  <!-- ✅ Toggle Script -->
+  <script>
+    const toggle = document.getElementById("edubot-toggle");
+    const panel = document.getElementById("chatbot-panel");
+    const iframe = document.getElementById("chatbot-iframe");
+    let isLoaded = false;
+
+    toggle.addEventListener("click", () => {
+      if (!isLoaded) {
+        iframe.src = "/chat-ui";
+        iframe.onload = () => {
+          panel.style.display = "block";
+          isLoaded = true;
+        };
+      } else {
+        panel.style.display = panel.style.display === "none" ? "block" : "none";
+      }
+    });
+  </script>
+
+  <!-- ✅ Carousel Slide Script -->
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+
+    setInterval(() => {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 3500);
+  </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduBot – Dhaanish Ahmed Institute of Technology</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="icon" href="/static/assets/logo.jpeg" />
+</head>
+<body>
+  <!-- ❌ Removed floating toggle button -->
+
+  <!-- ✅ Full Chat UI -->
+  <div class="chat-container" id="chat-container">
+    <header>
+      <img src="/static/assets/logo.jpeg" alt="College Logo" class="logo" onerror="this.style.display='none'">
+      <div class="title-section">
+        <h1 id="bot-name"></h1>
+        <p class="subtitle">Your virtual assistant from Dhaanish Ahmed Institute of Technology</p>
+      </div>
+      <button id="theme-toggle">🌙</button>
+    </header>
+
+    <section class="welcome-banner">
+      👋 Hello! I'm <strong id="bot-greeting-name"></strong>, your smart assistant. Ask me about <em>admissions, courses, fees, placements, and more!</em>
+    </section>
+    <div class="spacer-line"></div>
+
+    <div id="suggestions" class="suggestions">
+      <button>Fees</button>
+      <button>Placement</button>
+      <button>Hostel</button>
+      <button>Backlog</button>
+      <button>Smart Class</button>
+    </div>
+
+    <div class="chat-box" id="chat-box"></div>
+    <div id="typing-indicator" class="typing">🤖 <span id="bot-typing-name"></span> is typing<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Ask me anything..." autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script src="/static/config.js"></script>
+
+  <!-- ✅ Script (cleaned) -->
+  <script>
+    console.log("Bot config loaded:", BOT_CONFIG);
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const chatBox = document.getElementById('chat-box');
+    const typingIndicator = document.getElementById('typing-indicator');
+    const themeToggle = document.getElementById('theme-toggle');
+    const suggestions = document.querySelectorAll('#suggestions button');
+  
+    // Set dynamic bot name from config
+    document.getElementById("bot-name").textContent = BOT_CONFIG.name;
+    document.getElementById("bot-greeting-name").textContent = BOT_CONFIG.name;
+    document.getElementById("bot-typing-name").textContent = BOT_CONFIG.name;
+  
+    function addMessage(sender, message, timestamp = true) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message', sender);
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
+      msgDiv.innerHTML = `
+        <div class="bubble">
+          <div class="avatar">
+            <img src="${sender === 'bot' ? BOT_CONFIG.botAvatar : BOT_CONFIG.userAvatar}" alt="avatar" />
+          </div>
+          <div class="text">${message}</div>
+        </div>
+        ${timestamp ? `<span class="time">${timeStr}</span>` : ''}
+      `;
+  
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  
+    async function sendMessage(message) {
+      if (!message.trim()) return;
+  
+      addMessage('user', message);
+      typingIndicator.style.display = 'block';
+  
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        addMessage('bot', data.response);
+      } catch (err) {
+        addMessage('bot', '⚠️ Error connecting to server.');
+      } finally {
+        typingIndicator.style.display = 'none';
+      }
+    }
+  
+    // Handle user input submit
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = userInput.value.trim();
+      userInput.value = '';
+      sendMessage(message);
+    });
+  
+    // Handle suggestion button clicks
+    suggestions.forEach(button => {
+      button.addEventListener('click', () => {
+        const message = button.textContent;
+        sendMessage(message);
+      });
+    });
+  
+    // Theme toggle
+    const root = document.documentElement;
+    if (localStorage.getItem('theme') === 'dark') {
+      root.classList.add('dark');
+    }
+    themeToggle.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>  
+</body>
+</html>
