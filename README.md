@@ -1,37 +1,48 @@
-# 🎓 EduBot – AI-Powered College Chatbot  
-**Dhaanish Ahmed Institute of Technology**
+# 🤖 Tulasi – AI Chatbot for Dhaanish Ahmed Institute of Technology
 
-> An intelligent and interactive chatbot designed to answer student queries about courses, admissions, fees, placements, and more — powered by Semantic Search and Generative AI (LLMs).
+A smart virtual assistant designed to answer real-world college-related queries such as admissions, courses, fees, hostel, placements, and more! EduBot combines semantic search with an LLM (FLAN-T5) to give fast, relevant, and intelligent responses.
 
-![EduBot Screenshot](backend/static/assets/Screen.png) 
+![EduBot Screenshot](backend/static/assets/Screen.png)
 
 ---
 
 ## 🚀 Features
 
-- 💬 **Smart Chat Interface**: Built with HTML/CSS and responsive UI design.
-- 🔍 **Semantic Search Matching**: Uses `sentence-transformers` to match user queries with college FAQs.
-- 🤖 **LLM-Powered Fallback (FLAN-T5)**: Generates intelligent responses when no exact FAQ match is found.
-- 📁 **College Website Clone UI**: Integrated as a floating chatbot on a clone of your college homepage.
-- 🌗 **Dark/Light Mode Toggle**: Modern theme support for better accessibility.
-- 📌 **Suggested Quick Prompts**: Users can click preset questions like “Fees” or “Placement”.
-- 🔒 **Deployed via Flask**: Fast and easy backend setup ready for cloud deployment.
-
----
-
-## 🛠️ Tech Stack
-
-| Frontend | Backend | AI Models | Libraries |
-|----------|---------|-----------|-----------|
-| HTML, CSS, JS | Flask (Python) | `all-MiniLM-L6-v2`, `flan-t5-base` | sentence-transformers, transformers, NumPy, scikit-learn |
+- ✅ **Semantic FAQ Matching** using Sentence Transformers
+- ✅ **LLM-based Response Fallback** with FLAN-T5
+- ✅ **Dynamic Chatbot UI** with floating toggle and college-style design
+- ✅ **Dark/Light Mode Toggle**
+- ✅ **Bot/User Avatar Customization**
+- ✅ **Cloned College Website Interface**
 
 ---
 
 ## 🧠 How It Works
 
-1. The user sends a query via the chatbot interface.
-2. The system first attempts **semantic similarity** with a local FAQ list.
-3. If no match is strong enough (threshold < 0.5), a **LLM (FLAN-T5)** generates a response.
-4. The chatbot replies in real-time with helpful college-specific information.
+1. The user types a question in the chatbot UI.
+2. The backend checks for semantic similarity using `sentence-transformers`.
+3. If a high-match FAQ is found → return answer.
+4. If not → fallback to LLM (FLAN-T5) for generating a relevant response.
+5. All replies are displayed live inside a beautiful, responsive UI.
 
 ---
+
+## 🛠️ Tech Stack
+
+| Layer       | Technology                         |
+|-------------|------------------------------------|
+| Frontend    | HTML, CSS, JavaScript              |
+| Backend     | Python, Flask                      |
+| AI Models   | SentenceTransformer, FLAN-T5       |
+| Deployment  | Localhost / GitHub (Free Tier Ready) |
+| Design      | Custom HTML/CSS + Floating Toggle |
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/Arul123457/AI_College_Chatbot.git
+cd AI_College_Chatbot
+pip install -r requirements.txt
+python app.py
