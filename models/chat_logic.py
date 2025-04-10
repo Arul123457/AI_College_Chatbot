@@ -23,11 +23,32 @@ faq_embeddings = semantic_model.encode(faq_questions)
 
 # Keyword Boost Map
 KEYWORD_BOOST = {
-    "ragging": "Is there any ragging issues in the campus?",
-    "placement": "Is placement support available for students?",
+    "btech fees": "What are the fees for B.Tech?",
     "fees": "What are the fees for B.Tech?",
-    "hostel": "How is the Food at Hostel?",
-    "admission": "When does the admission process start?"
+    "admission date": "When does the admission process start?",
+    "admission process": "When does the admission process start?",
+    "course list": "Which courses are offered?",
+    "courses": "Which courses are offered?",
+    "contact": "How can I contact the college?",
+    "college contact": "How can I contact the college?",
+    "hostel food": "How is the Food at Hostel?",
+    "food": "How is the Food at Hostel?",
+    "backlog": "Can I apply with a backlog in one subject?",
+    "ai club": "Are there any AI or robotics clubs in the college?",
+    "robotics club": "Are there any AI or robotics clubs in the college?",
+    "lateral entry": "What is the process for lateral entry into B.Tech?",
+    "internship": "Does the college provide internships?",
+    "documents": "What documents are required for admission?",
+    "placement": "Is placement support available for students?",
+    "convocation": "How can I register for convocation?",
+    "girl hostel": "Are hostel facilities available for girls?",
+    "salary": "What is the Highest salary package student placed?",
+    "highest package": "What is the Highest salary package student placed?",
+    "about": "About the college?",
+    "college info": "About the college?",
+    "how to apply": "How can I get a admission?",
+    "ragging": "Is there any ragging issues in the campus?",
+    "smart class": "Does your college provide smart classes?",
 }
 
 def semantic_match(user_input):
