@@ -3,7 +3,7 @@
 
 > An intelligent and interactive chatbot designed to answer student queries about courses, admissions, fees, placements, and more — powered by Semantic Search and Generative AI (LLMs).
 
-![EduBot Screenshot](static/assets/Screen.png) 
+![EduBot Screenshot](backen/static/assets/Screen.png) 
 
 ---
 
