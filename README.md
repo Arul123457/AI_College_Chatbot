@@ -1,4 +1,4 @@
-# 🤖 EduBot – AI Chatbot for Dhaanish Ahmed Institute of Technology
+# 🤖 Tulasi – AI Chatbot for Dhaanish Ahmed Institute of Technology
 
 A smart virtual assistant designed to answer real-world college-related queries such as admissions, courses, fees, hostel, placements, and more! EduBot combines semantic search with an LLM (FLAN-T5) to give fast, relevant, and intelligent responses.
 
