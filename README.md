@@ -35,7 +35,3 @@
 4. The chatbot replies in real-time with helpful college-specific information.
 
 ---
-
-## 📂 Folder Structure
-
-AI_College_Chatbot/ ├── app.py # Flask application ├── models/ │ └── chat_logic.py # Semantic + LLM logic ├── data/ │ └── college_faq.json # College FAQs ├── templates/ │ ├── index.html # Chat UI │ └── college_home.html # College homepage clone with floating bot ├── static/ │ ├── style.css # Chatbot and UI styles │ ├── config.js # Dynamic bot config │ └── assets/ # Bot/User avatars, campus images, logo
