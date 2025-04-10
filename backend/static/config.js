@@ -1,5 +1,5 @@
 const BOT_CONFIG = {
-  name: "EduBot",
+  name: "Tulasi",
   botAvatar: "/static/assets/bot.png",
   userAvatar: "/static/assets/user.png"
 };
