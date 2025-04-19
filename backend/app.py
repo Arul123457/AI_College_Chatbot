@@ -10,19 +10,16 @@ from models.chat_logic import generate_chat_response
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
-# ✅ Route 1: College Homepage with floating chatbot
 @app.route("/")
 def college_home():
     print("🔵 Serving college homepage")
     return render_template("college_home.html")
 
-# ✅ Route 2: Fullscreen Chat UI
 @app.route("/chat-ui")
 def chat_ui():
     print("🟢 Serving chatbot UI")
     return render_template("index.html")
 
-# ✅ Route 3: API to receive message and send bot response
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
@@ -43,5 +40,6 @@ def chat():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
-    print("🚀 Flask server is starting...")
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use the PORT environment variable if available
+    print(f"🚀 Flask server running on port {port}")
+    app.run(host="0.0.0.0", port=port, debug=False)
