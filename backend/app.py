@@ -10,27 +10,38 @@ from models.chat_logic import generate_chat_response
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 
+# ✅ Route 1: College Homepage with floating chatbot
 @app.route("/")
 def college_home():
+    print("🔵 Serving college homepage")
     return render_template("college_home.html")
 
+# ✅ Route 2: Fullscreen Chat UI
 @app.route("/chat-ui")
 def chat_ui():
+    print("🟢 Serving chatbot UI")
     return render_template("index.html")
 
+# ✅ Route 3: API to receive message and send bot response
 @app.route("/chat", methods=["POST"])
 def chat():
-    data = request.get_json()
-    user_query = data.get("message", "")
-    if not user_query:
-        return jsonify({"status": "error", "message": "No message provided"}), 400
-
     try:
+        data = request.get_json()
+        print("📨 Received POST to /chat:", data)
+
+        user_query = data.get("message", "")
+        if not user_query:
+            return jsonify({"status": "error", "message": "No message provided"}), 400
+
         bot_reply = generate_chat_response(user_query)
+        print("🤖 Bot reply:", bot_reply)
+
         return jsonify({"status": "success", "response": bot_reply})
+    
     except Exception as e:
+        print("❌ Exception in /chat:", str(e))
         return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Required for Render
-    app.run(host="0.0.0.0", port=port)
+    print("🚀 Flask server is starting...")
+    app.run(debug=True)
